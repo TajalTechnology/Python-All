@@ -1,0 +1,52 @@
+{% extends "product/base.html" %}
+
+{% block content %}
+    <table class="table table-borderless">
+    <thead class="border-bottom font-weight-bold">
+    <tr>
+        <td>Name</td>
+        <td>Slug</td>
+        <td>Catagory</td>
+        <td>Brand</td>
+        <td>Price</td>
+        <td>Image</td>
+        <td>Description</td>
+        <td>status</td>
+        <td><a href="{% url 'product_form'  %}" class="btn btn-success">
+                <i class="fas fa-plus"></i> Add new
+            </a></td>
+    </tr>
+
+    </thead>
+    <tbody>
+    {% for product in product_list %}
+        <tr>
+        <td>{{ product.name }}</td>
+        <td>{{ product.slug }}</td>
+        <td>{{ product.category }}</td>
+        <td>{{ product.brand }}</td>
+        <td>{{ product.price }}</td>
+        <td>{{ product.image }}</td>
+        <td>{{ product.Description }}</td>
+        <td>{{ product.status }}</td>
+        <td><form action="{% url 'product_delete' product.id %}" method="post">
+            {% csrf_token %}
+               <button type="submit" class="btn">
+                   <i class="far fa-trash-alt fa-lg text-danger float-right"></i>
+               </button>
+           </form></td>
+        <td>
+            <a href="{% url 'product_update' product.id %}" class="btn text-secondary px-0">
+                <i class="far fa-edit fa-lg"></i>
+            </a>
+
+
+
+        </td>
+        </tr>
+
+    {% endfor %}
+    </tbody>
+
+    </table>
+{% endblock content %}
